@@ -1,0 +1,590 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
+:root {
+  font-family: Manrope, system-ui, sans-serif;
+  color: #f5f5e9;
+  background: #142b2a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+body {
+  overscroll-behavior: none;
+}
+.game-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #b7d9d0;
+}
+canvas {
+  display: block;
+  touch-action: none;
+}
+.ui-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 23px 30px;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 35, 34, 0.78),
+    rgba(13, 35, 34, 0)
+  );
+}
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #b8d6ba66;
+  border-radius: 12px;
+  background: #163a35a8;
+  color: #c7e8c6;
+}
+.brand {
+  min-width: 0;
+}
+.eyebrow,
+.quest-label,
+.crystal-counter small,
+.location-tag,
+.desktop-hints,
+.bottom-note,
+.game-modal .modal-kicker,
+.crystal-progress,
+.victory-stats {
+  font-family: "DM Mono", monospace;
+  letter-spacing: 0.12em;
+}
+.eyebrow {
+  font-size: 9px;
+  color: #b3d2c0;
+  margin-bottom: 5px;
+}
+.game-name {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+.game-name span {
+  color: #a0c4b2;
+  font-weight: 400;
+  margin: 0 5px;
+}
+.game-name i {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #c8dfd0;
+}
+.crystal-counter {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  border: 1px solid #d6e8d22c;
+  border-radius: 12px;
+  background: #173833b8;
+  backdrop-filter: blur(12px);
+}
+.gem-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 9px;
+  background: #52d8c51b;
+  display: grid;
+  place-items: center;
+  color: #75f2df;
+}
+.crystal-counter small {
+  display: block;
+  font-size: 8px;
+  color: #adc6b9;
+  margin-bottom: 3px;
+}
+.crystal-counter strong {
+  font-size: 17px;
+  letter-spacing: 0.05em;
+}
+.crystal-counter em {
+  font-size: 12px;
+  font-style: normal;
+  color: #94b3a4;
+  font-weight: 500;
+}
+.crystal-progress {
+  display: flex;
+  gap: 3px;
+  margin-left: 8px;
+}
+.crystal-progress span {
+  height: 22px;
+  width: 4px;
+  border-radius: 5px;
+  background: #d3e4d12a;
+}
+.crystal-progress span.filled {
+  background: #69efdc;
+  box-shadow: 0 0 8px #61f5dd66;
+}
+.icon-button {
+  pointer-events: auto;
+  border: 1px solid #d6e8d22c;
+  border-radius: 10px;
+  width: 41px;
+  height: 41px;
+  display: grid;
+  place-items: center;
+  color: #e6f2e6;
+  background: #173833b8;
+  cursor: pointer;
+}
+.quest-card {
+  position: absolute;
+  top: 112px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(340px, calc(100vw - 40px));
+  padding: 14px 15px;
+  border: 1px solid #d4e8d039;
+  border-radius: 13px;
+  background: #173833c9;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 30px #0b29211a;
+}
+.quest-symbol {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #c9e8bb16;
+  color: #d7eeb0;
+}
+.quest-label {
+  font-size: 8px;
+  color: #b6d1be;
+  margin-bottom: 4px;
+}
+.quest-title {
+  font-size: 13px;
+  font-weight: 800;
+}
+.quest-copy {
+  font-size: 10px;
+  color: #b9d0c3;
+  margin-top: 4px;
+  line-height: 1.45;
+}
+.quest-count {
+  margin-left: auto;
+  align-self: flex-start;
+  color: #8ee7d2;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+}
+.location-tag {
+  position: absolute;
+  right: 30px;
+  top: 112px;
+  font-size: 9px;
+  padding: 10px 13px;
+  border-radius: 8px;
+  border: 1px solid #244d4140;
+  background: #edf5d9b8;
+  color: #365b4c;
+  backdrop-filter: blur(8px);
+}
+.location-dot,
+.status-pulse {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #63d5a1;
+  box-shadow: 0 0 9px #63d5a1;
+  margin-right: 7px;
+}
+.desktop-hints {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  padding: 11px 16px;
+  border: 1px solid #d8e8d42b;
+  border-radius: 11px;
+  background: #173833ba;
+  backdrop-filter: blur(12px);
+  font-size: 8px;
+  color: #bdd2c3;
+  white-space: nowrap;
+}
+.desktop-hints span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.desktop-hints kbd {
+  font:
+    9px "DM Mono",
+    monospace;
+  min-width: 18px;
+  height: 19px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid #d7e8d53b;
+  border-radius: 4px;
+  background: #f0f6e80e;
+  color: #f4f5e9;
+  padding: 0 4px;
+}
+.bottom-note {
+  position: absolute;
+  bottom: 28px;
+  left: 30px;
+  font-size: 8px;
+  color: #e9f3df;
+  text-shadow: 0 1px 4px #244d3e;
+  letter-spacing: 0.13em;
+}
+.note-divider {
+  color: #b1d0bc;
+  margin: 0 8px;
+}
+.modal-backdrop {
+  pointer-events: auto;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #0d2425a8;
+  backdrop-filter: blur(7px);
+  padding: 20px;
+}
+.game-modal {
+  position: relative;
+  width: min(420px, 100%);
+  padding: 35px 32px 29px;
+  text-align: center;
+  border: 1px solid #c9e3d43b;
+  border-radius: 21px;
+  background: linear-gradient(145deg, #20463e, #142e2c);
+  box-shadow: 0 25px 90px #071b1a80;
+}
+.modal-emblem {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 20px;
+  border-radius: 18px;
+  background: #75f2d51a;
+  color: #8bf0d7;
+  border: 1px solid #75f2d52b;
+}
+.modal-kicker {
+  font-size: 9px;
+  color: #a9d8c4;
+}
+.game-modal h1 {
+  font-size: 27px;
+  line-height: 1.2;
+  margin: 12px 0 10px;
+  letter-spacing: -0.04em;
+}
+.game-modal p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #b7cec3;
+  margin: 0 auto 23px;
+  max-width: 300px;
+}
+.primary-button,
+.secondary-button {
+  pointer-events: auto;
+  cursor: pointer;
+  width: 100%;
+  height: 45px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+.primary-button {
+  border: 0;
+  background: #b7e9c7;
+  color: #17392f;
+  font-weight: 500;
+}
+.secondary-button {
+  margin-top: 9px;
+  border: 1px solid #d5e8d42c;
+  background: transparent;
+  color: #d5e7dc;
+}
+.modal-close {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  border: 0;
+  background: transparent;
+  color: #a7c7b6;
+  cursor: pointer;
+}
+.victory-stats {
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  margin: -5px 0 22px;
+  color: #a7e9d5;
+  font-size: 8px;
+}
+.victory-stats span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.mobile-controls {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.joystick {
+  pointer-events: auto;
+  touch-action: none;
+  position: absolute;
+  left: 25px;
+  bottom: 72px;
+  width: 112px;
+  height: 112px;
+  border: 1px solid #ecf6e47a;
+  border-radius: 50%;
+  background: #163b3270;
+  backdrop-filter: blur(5px);
+  display: grid;
+  place-items: center;
+  color: #e4f2df;
+  font:
+    8px "DM Mono",
+    monospace;
+  letter-spacing: 0.12em;
+}
+.joystick-knob {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #e9f5df9c;
+  background: #e0f2d735;
+  position: absolute;
+  left: 33px;
+  top: 23px;
+  box-shadow: 0 2px 9px #102e2640;
+}
+.mobile-actions {
+  position: absolute;
+  right: 22px;
+  bottom: 74px;
+  display: flex;
+  align-items: flex-end;
+  gap: 13px;
+  pointer-events: auto;
+}
+.action-button {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  background: #173b34c7;
+  border: 1px solid #e6f5df75;
+  color: #f3f5e8;
+  touch-action: none;
+  font:
+    8px "DM Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+.action-button.active {
+  background: #9cdcb9;
+  color: #16392e;
+}
+.jump-action {
+  width: 70px;
+  height: 70px;
+  background: #c7ebcfdf;
+  color: #173d32;
+}
+.jump-arrow {
+  font-size: 25px;
+  line-height: 1;
+}
+.touch-look {
+  position: absolute;
+  bottom: 28px;
+  right: 22px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #eaf4e2a6;
+  font:
+    8px "DM Mono",
+    monospace;
+  letter-spacing: 0.06em;
+}
+@media (max-width: 760px) {
+  .topbar {
+    padding: 15px 15px;
+    gap: 8px;
+  }
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+  }
+  .eyebrow {
+    font-size: 7px;
+  }
+  .game-name {
+    font-size: 11px;
+    letter-spacing: 0.07em;
+  }
+  .game-name i {
+    font-size: 8px;
+  }
+  .crystal-counter {
+    padding: 7px;
+    gap: 6px;
+  }
+  .gem-icon {
+    width: 28px;
+    height: 28px;
+  }
+  .crystal-counter small {
+    font-size: 6px;
+  }
+  .crystal-counter strong {
+    font-size: 14px;
+  }
+  .crystal-counter em {
+    font-size: 10px;
+  }
+  .crystal-progress {
+    display: none;
+  }
+  .pause-button {
+    width: 34px;
+    height: 34px;
+  }
+  .quest-card {
+    top: 83px;
+    left: 14px;
+    width: 260px;
+    padding: 10px;
+    gap: 9px;
+  }
+  .quest-symbol {
+    width: 32px;
+    height: 32px;
+  }
+  .quest-title {
+    font-size: 11px;
+  }
+  .quest-copy {
+    font-size: 9px;
+  }
+  .quest-label {
+    font-size: 7px;
+  }
+  .quest-count {
+    font-size: 9px;
+  }
+  .location-tag {
+    top: 87px;
+    right: 12px;
+    padding: 8px;
+    font-size: 7px;
+    letter-spacing: 0.04em;
+  }
+  .bottom-note {
+    left: 14px;
+    bottom: 20px;
+    font-size: 7px;
+  }
+  .game-modal {
+    padding: 30px 22px 23px;
+  }
+  .game-modal h1 {
+    font-size: 24px;
+  }
+  .game-modal p {
+    font-size: 11px;
+  }
+  .victory-stats {
+    font-size: 7px;
+    gap: 8px;
+  }
+}
+@media (orientation: portrait) and (max-width: 760px) {
+  .location-tag {
+    top: 145px;
+  }
+  .quest-card {
+    top: 85px;
+  }
+  .joystick {
+    bottom: 85px;
+    left: 17px;
+    width: 100px;
+    height: 100px;
+  }
+  .joystick-knob {
+    left: 27px;
+    top: 20px;
+  }
+  .mobile-actions {
+    bottom: 87px;
+    right: 15px;
+  }
+  .touch-look {
+    bottom: 28px;
+    right: 15px;
+  }
+}
